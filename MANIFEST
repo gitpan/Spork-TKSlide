@@ -6,6 +6,7 @@ lib/Spork/Slides/TKSlide.pm
 lib/Spork/Template/TKSlide.pm
 Makefile.PL
 MANIFEST
+README
 rebuild
 Spork.slides
 t/0.use.t

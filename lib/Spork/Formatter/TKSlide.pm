@@ -74,7 +74,7 @@ sub inner_to_html {
 sub to_html {
     my $self = shift;
     my $inner = $self->inner_to_html;
-    if($self->hide) {$inner = qq{<div title="hide">$inner</div>}}
+    if($self->hide) {$inner = qq{<div title="hide();">$inner</div>}}
     return $self->html_start . $inner . $self->html_end;
 }
 
@@ -100,7 +100,7 @@ sub to_html {
     $self->hub->slides->slide_heading($text)
       unless $self->hub->slides->slide_heading;
     if($self->hide) {
-	return qq{<h$level title="hide">$text</h$level>\n};
+	return qq{<h$level title="hide();">$text</h$level>\n};
     }
     return "<h$level>$text</h$level>\n";
 }
@@ -204,7 +204,7 @@ sub to_html {
     my $self = shift;
     my $inner = $self->inner_to_html;
     if($self->hide) {
-	return q{<li title="hide">} . $inner . $self->html_end;
+	return q{<li title="hide();">} . $inner . $self->html_end;
     }
     return $self->html_start . $inner . $self->html_end;
 }

@@ -45,7 +45,9 @@ sub make_slides {
 
 sub make_style {
     my $self = shift;
-    $self->make_file($self->config->style_file);
+    for ('slide-zen.css', 'slide.css', 'slide-tkirby.css') {
+        $self->make_file($_);
+    }
 }
 
 sub make_javascript {

@@ -2,6 +2,7 @@ package Spork::Config::TKSlide;
 use strict;
 
 use Spork::Config '-base';
+our $VERSION = '0.01';
 
 const class_id => 'config';
 

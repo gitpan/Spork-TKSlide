@@ -2,6 +2,7 @@ package Spork::Template::TKSlide;
 use strict;
 use warnings;
 use Spork::Template::TT2 '-base';
+our $VERSION = '0.01';
 
 1;
 __DATA__

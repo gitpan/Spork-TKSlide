@@ -3,6 +3,8 @@ use strict;
 use Spork::Slides '-base';
 use IO::All;
 
+our $VERSION = '0.01';
+
 const class_id => 'slides';
 
 sub make_slides {

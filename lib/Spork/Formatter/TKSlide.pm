@@ -2,6 +2,8 @@ package Spork::Formatter::TKSlide;
 use strict;
 use Spoon::Formatter '-base';
 
+our $VERSION = '0.01';
+
 const top_class => 'Spork::Formatter::TKSlide::Top';
 
 sub formatter_classes {
@@ -18,6 +20,7 @@ sub formatter_classes {
 ################################################################################
 package Spork::Formatter::TKSlide::Unit;
 use base 'Spoon::Formatter::Unit';
+our $VERSION = '0.01';
 field hide => 0;
 
 sub parse_blocks {

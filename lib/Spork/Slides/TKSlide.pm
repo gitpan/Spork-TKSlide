@@ -1,14 +1,12 @@
 package Spork::Slides::TKSlide;
 use strict;
-use Spork::Slides '-base';
-use IO::All;
+use Spork::Slides '-Base';
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 const class_id => 'slides';
 
 sub make_slides {
-    my $self = shift;
     $self->use_class('formatter');
     $self->use_class('template');
 
@@ -46,19 +44,17 @@ sub make_slides {
 }
 
 sub make_style {
-    my $self = shift;
     for ('slide-zen.css', 'slide.css', 'slide-tkirby.css') {
         $self->make_file($_);
     }
 }
 
 sub make_javascript {
-    my $self = shift;
     $self->make_file('controls.js');
 }
 
 sub make_file {
-    my ($self,$template,$file) = @_;
+    my ($template,$file) = @_;
     $file ||= $template;
     my $output = $self->template
 	->process($template,
@@ -68,13 +64,7 @@ sub make_file {
     $output > io($file_name);
 }
 
-sub start_name {
-    my $self = shift;
-    $self->config->slides_directory . '/start.html';
-}
-
 sub split_slides {
-    my $self = shift;
     my $slides_file = shift;
     my @slide_info;
     my @slides = grep $_, split /^-{4,}\s*\n/m, io($slides_file)->slurp;
@@ -85,53 +75,22 @@ sub split_slides {
             $config = $self->hub->config->parse_yaml($slide);
             next;
         }
-
-	my $slide_info =
-	    {
-	     slide_num => $slide_num,
-	     slide_content => $slide,
-	     slide_name => "page$slide_num",
-	     config => $config,
-	    };
-	$config = {};
-	push @slide_info, $slide_info;
-        $slide_num++;
+	my @sub_slides = $self->sub_slides($slide);
+	while(@sub_slides) {
+	    my $sub_slide = shift @sub_slides;
+	    my $slide_info =
+		{
+		    slide_num => $slide_num,
+		    slide_content => $sub_slide,
+		    slide_name => "page$slide_num",
+		    config => $config,
+		};
+	    $config = {};
+	    push @slide_info, $slide_info;
+	    $slide_num++;
+	}
     }
     return @slide_info;
-}
-
-sub sub_slides {
-    my $self = shift;
-    my $raw_slide = shift;
-    my (@slides, $slide);
-    for (split /^\+/m, $raw_slide) {
-        push @slides, $slide .= $_;
-    }
-    return @slides;
-}
-
-sub get_image_html {
-    my $self = shift;
-    my $image_url = $self->image_url
-      or return '';
-    my $image_width;
-    ($image_url, $image_width) = split /\s+/, $image_url;
-    $image_width ||= $self->config->image_width;
-    my $image_file = $image_url;
-    $image_file =~ s/.*\///;
-    my $images_directory = $self->config->slides_directory . '/images';
-    $self->assert_directory($images_directory);
-    my $image_html =
-      qq{<img width="$image_width" src="images/$image_file" align="right">};
-    return $image_html if -f "$images_directory/$image_file";
-    require Cwd;
-    my $home = Cwd::cwd();
-    chdir($images_directory) or die;
-    my $method = $self->config->download_method . '_download';
-    warn "- Downloading $image_url\n";
-    $self->$method($image_url, $image_file);
-    chdir($home) or die;
-    return -f "$images_directory/$image_file" ? $image_html : '';
 }
 
 
@@ -144,7 +103,7 @@ presentation_title: Spork:TKSlide Generate TKSlide with Spork.
 presentation_place: NO
 presentation_date: NO
 ----
-image<http://gugod.org/imgs/spork/SporkCollection.jpg>
+{image: http://gugod.org/imgs/spork/SporkCollection.jpg}
 == What is Spork?
 * Spork Stands for:
 +** Slide Presentation (Only Really Kwiki)
@@ -154,7 +113,7 @@ image<http://gugod.org/imgs/spork/SporkCollection.jpg>
 +** All slides are in one simple file
 +** Run |spork -make| to make the slides
 ----
-image<http://gugod.org/imgs/kirby/kirby.jpg>
+{image: http://gugod.org/imgs/kirby/kirby.jpg}
 == What is TKSlide?
 * TKSlide stands for:
 +** Tkirby's slides
@@ -169,24 +128,17 @@ image<http://gugod.org/imgs/kirby/kirby.jpg>
 +* Generate the tkslide effect
 +** That's cool.
 +* So, That's *POWERFUL*
-image<http://gugod.org/imgs/powerful/upside-down.jpg>
+{image: http://gugod.org/imgs/powerful/upside-down.jpg}
 +* Check the source code of this slide:
 ** http://gugod.org/Slides/Spork-TKSlide/Spork.slides
 ----
-= TEST SLIDE
-image<http://gugod.org/imgs/spork/SporkCollection.jpg>
-+
-This slide is used to see how can "hide" element work. So everything
-inside doesn't mean much.
-+* Test
-+** Test again
-+** Cool ?
-+* Not
-+* Maybe drop the image to scary people
-image<http://gugod.org/imgs/kirby/kirby.jpg>
+= ToDo
+{image: http://gugod.org/imgs/spork/SporkCollection.jpg}
++* To Support TKSlide in a better way
++** TKSlides has very fancy hide() which is currently useless.
 ----
 == That's All
 
-image<http://gugod.org/imgs/thank-you/thank-you.gif>
+{image: http://gugod.org/imgs/thank-you/thank-you.gif}
 
 * The END

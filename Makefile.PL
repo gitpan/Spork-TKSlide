@@ -5,10 +5,10 @@ WriteMakefile(
     AUTHOR              => 'Kang-min Liu (gugod@gugod.org)',
     ABSTRACT            => 'Spork backend for TKSlide (fancy look html slideshow)',
     NAME                => 'Spork::TKSlide',
-    VERSION		=> '0.03',
+    VERSION		=> '0.04',
     DISTNAME            => 'Spork-TKSlide',
     PREREQ_PM           => {
-        'Spork'   => '0',
+        'Spork'   => '0.16',
     },
     dist                => {
         COMPRESS        => 'gzip -9',

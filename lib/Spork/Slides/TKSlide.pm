@@ -3,7 +3,7 @@ use strict;
 use Spork::Slides '-base';
 use IO::All;
 
-field const class_id => 'slides_tkslide';
+const class_id => 'slides';
 
 sub make_slides {
     my $self = shift;

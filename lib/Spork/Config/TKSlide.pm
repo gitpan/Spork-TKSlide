@@ -3,7 +3,7 @@ use strict;
 
 use Spork::Config '-base';
 
-field const class_id => 'config_tkslide';
+const class_id => 'config';
 
 sub default_configs {
     my $self = shift;

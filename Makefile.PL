@@ -5,7 +5,7 @@ WriteMakefile(
     AUTHOR              => 'Kang-min Liu (gugod@gugod.org)',
     ABSTRACT            => 'Spork backend for TKSlide',
     NAME                => 'Spork::Config::TKSlide',
-    VERSION		=> '0.01',
+    VERSION		=> '0.02',
     DISTNAME            => 'Spork-TKSlide',
     PREREQ_PM           => {
         'Spork'   => '0',

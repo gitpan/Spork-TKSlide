@@ -3,8 +3,6 @@ use strict;
 
 use Spork::Config '-base';
 
-our $VERSION = '0.01';
-
 field const class_id => 'config_tkslide';
 
 sub default_configs {
@@ -36,7 +34,7 @@ sub default_config {
 
 =head1 NAME
 
-Spork::Config::TKSlide - Spork Configuration Class
+Spork::Config - Spork Configuration Class
 
 =head1 SETTINGS
 
@@ -69,18 +67,6 @@ under templtae/tkslide.
 =head1 SEE ALSO
 
 L<Spork>, L<Spork::Config>
-
-=head1 COPYRIGHT
-
-Copyright 2004 by Kang-min Liu <gugod@gugod.org>.
-
-This program is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself.
-
-See <http://www.perl.com/perl/misc/Artistic.html>
-
-B<TKSlide> is done by Tkirby Wu <b88039@csie.ntu.edu.tw>,
-the official site is at <http://www.csie.ntu.edu.tw/~b88039/slide/>.
 
 =cut
 
@@ -119,4 +105,5 @@ formatter_class: Spork::Formatter::TKSlide
 slides_class: Spork::Slides::TKSlide
 config_class: Spork::Config::TKSlide
 
-style_file: style.css
+style_file: slide.css
+

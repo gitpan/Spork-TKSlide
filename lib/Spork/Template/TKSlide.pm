@@ -3,39 +3,6 @@ use strict;
 use warnings;
 use Spork::Template::TT2 '-base';
 
-our $VERSION = '0.01';
-
-=head1 NAME
-
-Spork::Template::TKSlide - Default TKSlide Template.
-
-=head1 DESCRIPTION
-
-These are the default template file for Spork:TKSlide,
-You don't want to edit html templates, but you can
-try to design your own style by applying different CSS.
-
-See L<Spork::Config::TKSlide> for changing default style.
-
-=head1 SEE ALSO
-
-L<Spork>, L<Spork::Config::TKSlide>
-
-=head1 COPYRIGHT
-
-Copyright 2004 by Kang-min Liu <gugod@gugod.org>.
-
-This program is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself.
-
-See <http://www.perl.com/perl/misc/Artistic.html>
-
-B<TKSlide> is done by Tkirby Wu <b88039@csie.ntu.edu.tw>,
-the official site is at <http://www.csie.ntu.edu.tw/~b88039/slide/>.
-
-=cut
-
-
 1;
 __DATA__
 __start.html__

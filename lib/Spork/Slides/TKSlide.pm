@@ -2,7 +2,7 @@ package Spork::Slides::TKSlide;
 use strict;
 use Spork::Slides '-Base';
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 const class_id => 'slides';
 
@@ -10,7 +10,6 @@ sub make_slides {
     $self->use_class('formatter');
     $self->use_class('template');
 
-    $self->assert_directory($self->config->slides_directory);
     my @slides = $self->split_slides($self->config->slides_file);
 
     my $allpage_html;
@@ -38,7 +37,7 @@ sub make_slides {
 		  spork_version => "Spork v$Spork::VERSION",
 		 );
     my $file_name = $self->config->slides_directory . '/start.html';
-    $output > io($file_name);
+    $output > io($file_name)->assert;
     $self->make_style;
     $self->make_javascript;
 }
@@ -61,7 +60,7 @@ sub make_file {
 		  spork_version => "Spork v$Spork::VERSION",
 		 );
     my $file_name = $self->config->slides_directory . "/$file";
-    $output > io($file_name);
+    $output > io($file_name)->assert;
 }
 
 sub split_slides {
